@@ -107,6 +107,10 @@ h1 { font-size: clamp(2.6rem, 7vw, 4.2rem); font-weight: 700; line-height: 1; le
 .project h3 { font-size: 1.4rem; font-weight: 700; }
 .project ul.points { margin: 0; padding-left: 20px; display: grid; gap: 8px; max-width: 70ch; }
 .pipeline { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+.plinks { display: flex; flex-wrap: wrap; gap: 10px; }
+.plinks .btn { padding: 7px 14px; font-size: 0.88rem; }
+.badge { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.04em; color: var(--mark); border: 1px solid var(--mark); border-radius: 999px; padding: 2px 10px; justify-self: start; }
+.projects { display: grid; gap: 18px; }
 .pipeline span.step { border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; color: var(--ink); }
 
 /* Experience timeline */
@@ -138,6 +142,11 @@ h1 { font-size: clamp(2.6rem, 7vw, 4.2rem); font-weight: 700; line-height: 1; le
 .contact a { color: var(--bg); }
 footer { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); text-align: center; }
 
+/* CS project help */
+.help { background: var(--accent-soft); border: 1px solid var(--line); border-radius: 16px; padding: 32px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; }
+.help-text { display: grid; gap: 10px; min-width: 0; }
+.help-text p { color: var(--muted); }
+.help .btn.primary { padding: 14px 22px; font-size: 1rem; font-weight: 600; text-align: center; justify-content: center; }
 @media (max-width: 680px) {
   .wrap { gap: 56px; padding-block: 32px 48px; }
   .hero { grid-template-columns: 1fr; gap: 24px; }
@@ -145,6 +154,8 @@ footer { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); text
   .skills, .edu { grid-template-columns: 1fr; }
   .timeline li { grid-template-columns: 1fr; gap: 6px; }
   .project, .contact { padding: 22px; }
+  .help { grid-template-columns: 1fr; padding: 22px; }
+  .help .btn.primary { width: 100%; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .btn { transition: transform .15s ease, opacity .15s ease; }
@@ -201,11 +212,11 @@ footer { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); text
     <div class="skills">
       <div class="skill">
         <h3>Data analysis</h3>
-        <ul class="tags"><li>Python</li><li>Pandas</li><li>NumPy</li><li>SQL joins</li><li>Aggregation</li><li>Data cleaning</li><li>EDA</li><li>Data visualization</li></ul>
+        <ul class="tags"><li>Python</li><li>Pandas</li><li>NumPy</li><li>SQL joins</li><li>Aggregation</li><li>Data cleaning</li><li>EDA</li><li>Data visualization</li><li>Plotly</li></ul>
       </div>
       <div class="skill">
         <h3>Machine learning</h3>
-        <ul class="tags"><li>Classification</li><li>Preprocessing</li><li>Feature extraction</li><li>Model evaluation</li></ul>
+        <ul class="tags"><li>XGBoost</li><li>scikit-learn</li><li>Classification</li><li>Feature engineering</li><li>Model evaluation</li><li>Streamlit</li></ul>
       </div>
       <div class="skill">
         <h3>Programming</h3>
@@ -220,9 +231,47 @@ footer { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); text
 
   <section aria-labelledby="proj-h">
     <div>
-      <p class="eyebrow">Project</p>
+      <p class="eyebrow">Projects</p>
       <h2 id="proj-h">Selected work</h2>
     </div>
+    <div class="projects">
+    <article class="project">
+      <span class="badge">Pitched to Swiggy Builders Club</span>
+      <h3>TasteMatch</h3>
+      <p>A social discovery prototype that connects people through their food and dine-out preferences, going beyond contact syncing to suggest matches based on what people actually like to eat.</p>
+      <div class="pipeline" aria-label="Project workflow">
+        <span class="step">Swiggy dataset (Kaggle)</span>→<span class="step">Preference profiles</span>→<span class="step">Match suggestions</span>→<span class="step">Web app</span>
+      </div>
+      <ul class="points">
+        <li>Built the prototype on a public Swiggy dataset from Kaggle to model food and dine-out preferences.</li>
+        <li>Designed matchmaking suggestions around shared tastes instead of contact lists.</li>
+        <li>Deployed it as a live web app on GitHub Pages and prepared it as a pitch for the Swiggy Builders Club.</li>
+      </ul>
+      <div class="plinks">
+        <a class="btn primary" href="https://holygiz-mos786.github.io/tasteMatch/" target="_blank" rel="noopener">Live demo</a>
+        <a class="btn ghost" href="https://github.com/holygiz-MOs786/tastematch" target="_blank" rel="noopener">View code</a>
+      </div>
+    </article>
+
+    <article class="project">
+      <span class="badge">BCA semester project</span>
+      <h3>Machine Digital Twin: Predictive Maintenance</h3>
+      <p>A live dashboard that mirrors a manufacturing machine. It replays sensor readings as a real-time feed and predicts the risk of failure before it happens.</p>
+      <div class="pipeline" aria-label="Project workflow">
+        <span class="step">AI4I 2020 sensor data</span>→<span class="step">Feature engineering</span>→<span class="step">XGBoost model</span>→<span class="step">Tuned alarm threshold</span>→<span class="step">Streamlit dashboard</span>
+      </div>
+      <ul class="points">
+        <li>Replays 10,000 machine sensor readings (temperature, speed, torque, tool wear) as a live feed and scores failure risk for each one.</li>
+        <li>Engineered temperature-difference and power features and trained an XGBoost classifier with a tuned alarm threshold.</li>
+        <li>Shows a risk gauge, trend charts and an automatic alert log, plus a what-if simulator to test how operating conditions change the risk.</li>
+      </ul>
+      <ul class="tags"><li>Python</li><li>Pandas</li><li>XGBoost</li><li>scikit-learn</li><li>Streamlit</li><li>Plotly</li></ul>
+      <div class="plinks">
+        <a class="btn primary" href="https://digitaltwin-mdtvyha5m9xhdvqhegp6ty.streamlit.app/" target="_blank" rel="noopener">Live demo</a>
+        <a class="btn ghost" href="https://github.com/holygiz-MOs786/digitalTwin" target="_blank" rel="noopener">View code</a>
+      </div>
+    </article>
+
     <article class="project">
       <h3>Spam/Ham Email Classifier</h3>
       <div class="pipeline" aria-label="Project workflow">
@@ -233,8 +282,12 @@ footer { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); text
         <li>Sourced a real-world dataset from Kaggle and cleaned it, handling missing values and inconsistent formatting before modeling.</li>
         <li>Applied Python libraries for text preprocessing, feature extraction and prediction, and evaluated model accuracy on a held-out test set.</li>
       </ul>
-      <ul class="tags"><li>Python</li><li>Pandas</li><li>Machine Learning</li></ul>
+      <ul class="tags"><li>Python</li><li>Pandas</li><li>Machine Learning</li><li>Streamlit</li></ul>
+      <div class="plinks">
+        <a class="btn primary" href="https://spamham-filter-ekxa8qhc4ht2zyw2ypmzxv.streamlit.app/" target="_blank" rel="noopener">Live demo</a>
+      </div>
     </article>
+    </div>
   </section>
 
   <section aria-labelledby="exp-h">
@@ -295,6 +348,15 @@ footer { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); text
         <div class="meta">HBTU Kanpur · 2021 – 2024 · Discontinued to pursue computing</div>
       </div>
     </div>
+  </section>
+
+  <section class="help" id="project-help" aria-labelledby="help-h">
+    <div class="help-text">
+      <p class="eyebrow"><b>&gt;&gt;&gt;</b> project help</p>
+      <h2 id="help-h">Need Help With Your CS Project?</h2>
+      <p>Looking for help with your college project? Share your requirements through the form, and let's discuss your project.</p>
+    </div>
+    <a class="btn primary" href="YOUR_GOOGLE_FORM_URL" target="_blank" rel="noopener noreferrer">Request a Project — Fill Out This Form</a>
   </section>
 
   <section class="contact" id="contact" aria-labelledby="contact-h">
